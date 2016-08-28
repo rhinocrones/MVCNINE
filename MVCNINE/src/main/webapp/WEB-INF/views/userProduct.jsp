@@ -16,6 +16,10 @@
 		<c:forEach items="${products}" var="product">
 			<tr>
 				<td>${product.name}</td>
+				<td>${product.price}</td>
+				<td>${product.category.category}</td>
+				<td>${product.brand.brand}</td>
+				<td>${product.size.size}</td>
 				<td>
 					<form action="/userPanel/userProduct" method="post">
 						<table>
