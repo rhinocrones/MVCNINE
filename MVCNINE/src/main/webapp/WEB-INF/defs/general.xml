@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+      "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+      "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+                <!-- Some templates -->
+    <definition name="common" template="/WEB-INF/layout/classic.jsp">
+        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+        <put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+    </definition>
+    
+    <definition name="index" extends="common">
+        <put-attribute name="title" value="index" />
+        <put-attribute name="body" value="/WEB-INF/views/index.jsp" />
+    </definition>
+    
+    <definition name="adminPanel" extends="common">
+        <put-attribute name="title" value="index" />
+        <put-attribute name="body" value="/WEB-INF/views/adminPanel.jsp" />
+    </definition>
+    
+    <definition name="brand" extends="common">
+        <put-attribute name="title" value="index" />
+        <put-attribute name="body" value="/WEB-INF/views/brand.jsp" />
+    </definition>
+    
+    <definition name="category" extends="common">
+        <put-attribute name="title" value="index" />
+        <put-attribute name="body" value="/WEB-INF/views/category.jsp" />
+    </definition>
+    
+    <definition name="product" extends="common">
+        <put-attribute name="title" value="index" />
+        <put-attribute name="body" value="/WEB-INF/views/product.jsp" />
+    </definition>
+    
+    <definition name="role" extends="common">
+        <put-attribute name="title" value="index" />
+        <put-attribute name="body" value="/WEB-INF/views/role.jsp" />
+    </definition>
+    
+    <definition name="size" extends="common">
+        <put-attribute name="title" value="index" />
+        <put-attribute name="body" value="/WEB-INF/views/size.jsp" />
+    </definition>
+    
+    <definition name="userOrder" extends="common">
+        <put-attribute name="title" value="index" />
+        <put-attribute name="body" value="/WEB-INF/views/userOrder.jsp" />
+    </definition>
+    
+    <definition name="userPanel" extends="common">
+        <put-attribute name="title" value="index" />
+        <put-attribute name="body" value="/WEB-INF/views/userPanel.jsp" />
+    </definition>
+    
+    <definition name="usr" extends="common">
+        <put-attribute name="title" value="index" />
+        <put-attribute name="body" value="/WEB-INF/views/usr.jsp" />
+    </definition>
+    
+        <definition name="userProduct" extends="common">
+        <put-attribute name="title" value="userProduct" />
+        <put-attribute name="body" value="/WEB-INF/views/userProduct.jsp" />
+    </definition>
+    
+</tiles-definitions>
