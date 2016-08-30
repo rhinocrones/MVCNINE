@@ -6,7 +6,7 @@ import ua.mysite.entity.Category;
 
 public interface CategoryService {
 
-	void save(String category);
+	void save(Category category);
 	
 	Category findById(int id);
 	

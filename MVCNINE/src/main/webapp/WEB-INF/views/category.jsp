@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,16 +10,20 @@
 </head>
 <body>
 	<h4>Category menu</h4>
-	<form action="/adminPanel/category" method="post">
+	<form:form action="/adminPanel/category" method="post" modelAttribute="category">
+		<form:hidden path="id"/>
 		<table>
+ 			<tr>
+ 				<td><form:errors path="category"/></td>
+ 			</tr>
 			<tr>
-				<td><input name="category" placeholder="New category"></td>
+				<td><form:input path="category"/></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Submit"></td>
+				<td><input type="submit"></td>
 			</tr>
 		</table>
-	</form>
+	</form:form>
 	<table>
 		<tr>
 			<th>Category name</th>

@@ -14,13 +14,8 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
-	public void save(String category) {
-		if (categoryRepository.findByCategory(category) == null) {
-			Category category2 = new Category();
-			category2.setCategory(category);
-			categoryRepository.save(category2);
-		} else
-			System.out.println("Exist");
+	public void save(Category category) {
+		categoryRepository.save(category);
 
 	}
 

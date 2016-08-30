@@ -37,12 +37,6 @@ public class AdminPanelController {
 	@Autowired
 	private UserOrderService userOrderService;
 
-	@RequestMapping("/adminPanel/category")
-	public String showCategory(Model model) {
-		model.addAttribute("categories", categoryService.findAll());
-		return "category";
-	}
-
 	@RequestMapping("/adminPanel/brand")
 	public String showBrand(Model model) {
 		model.addAttribute("brands", brandService.findAll());
