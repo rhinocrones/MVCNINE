@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>User order</title>
 </head>
 <body>
 	<h4>User order menu</h4>

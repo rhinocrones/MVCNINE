@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Category</title>
 </head>
 <body>
 	<h4>Category menu</h4>

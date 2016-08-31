@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Role</title>
 </head>
 <body>
 	<h4>Role menu</h4>

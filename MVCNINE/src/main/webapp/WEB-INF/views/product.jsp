@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Product</title>
 </head>
 <body>
 	<h4>Product menu</h4>

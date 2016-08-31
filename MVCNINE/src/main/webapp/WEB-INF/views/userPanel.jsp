@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>User Panel</title>
 </head>
 <body>
 	<h3>User Panel</h3>

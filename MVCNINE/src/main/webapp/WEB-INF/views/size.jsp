@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Size</title>
 </head>
 <body>
 	<h4>Size menu</h4>

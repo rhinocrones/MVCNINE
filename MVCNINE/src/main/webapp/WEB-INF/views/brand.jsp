@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Brand</title>
 </head>
 <body>
 	<h4>Brand menu</h4>
