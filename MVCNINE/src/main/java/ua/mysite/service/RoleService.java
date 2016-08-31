@@ -6,7 +6,7 @@ import ua.mysite.entity.Role;
 
 public interface RoleService {
 
-	void save(String role);
+	void save(Role role);
 	
 	Role findById(int id);
 	

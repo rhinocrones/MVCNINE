@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,16 +10,20 @@
 </head>
 <body>
 	<h4>Size menu</h4>
-	<form action="/adminPanel/size" method="post">
+	<form:form action="/adminPanel/size" method="post" modelAttribute="size">
+		<form:hidden path="id"/>
 		<table>
+ 			<tr>
+ 				<td><form:errors path="size"/></td>
+ 			</tr>
 			<tr>
-				<td><input name="size" placeholder="New size"></td>
+				<td><form:input path="size"/></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Submit"></td>
+				<td><input type="submit"></td>
 			</tr>
 		</table>
-	</form>
+	</form:form>
 	<table>
 		<tr>
 			<th>Size name</th>

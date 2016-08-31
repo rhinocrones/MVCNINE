@@ -6,7 +6,7 @@ import ua.mysite.entity.Size;
 
 public interface SizeService {
 
-	void save(int size);
+	void save(Size size);
 	
 	Size findById(int id);
 	

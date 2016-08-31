@@ -37,18 +37,6 @@ public class AdminPanelController {
 	@Autowired
 	private UserOrderService userOrderService;
 
-	@RequestMapping("/adminPanel/brand")
-	public String showBrand(Model model) {
-		model.addAttribute("brands", brandService.findAll());
-		return "brand";
-	}
-
-	@RequestMapping("/adminPanel/size")
-	public String showSize(Model model) {
-		model.addAttribute("sizes", sizeService.findAll());
-		return "size";
-	}
-
 	@RequestMapping("/adminPanel/product")
 	public String showProduct(Model model) {
 		model.addAttribute("products", productService.products());
@@ -56,12 +44,6 @@ public class AdminPanelController {
 		model.addAttribute("brands", brandService.findAll());
 		model.addAttribute("sizes", sizeService.findAll());
 		return "product";
-	}
-
-	@RequestMapping("/adminPanel/role")
-	public String showRole(Model model) {
-		model.addAttribute("roles", roleService.findAll());
-		return "role";
 	}
 
 	@RequestMapping("/adminPanel/usr")

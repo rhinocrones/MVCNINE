@@ -15,12 +15,8 @@ public class SizeServiceImpl implements SizeService {
 	@Autowired
 	private SizeRepository sizeRepository;
 
-	public void save(int size) {
-		if(sizeRepository.findBySize(size)==null){
-		Size size2 = new Size();
-		size2.setSize(size);
-		sizeRepository.save(size2);
-		} else System.out.println("Exist");
+	public void save(Size size) {
+		sizeRepository.save(size);
 	}
 
 	public Size findById(int id) {

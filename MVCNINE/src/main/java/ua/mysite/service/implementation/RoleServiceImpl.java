@@ -15,13 +15,8 @@ public class RoleServiceImpl implements RoleService {
 	@Autowired
 	private RoleRepository roleRepository;
 
-	public void save(String role) {
-		if (roleRepository.findByRole(role) == null) {
-			Role role2 = new Role();
-			role2.setRole(role);
-			roleRepository.save(role2);
-		} else
-			System.out.println("Exist");
+	public void save(Role role) {
+		roleRepository.save(role);
 	}
 
 	public Role findById(int id) {

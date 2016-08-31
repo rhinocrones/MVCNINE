@@ -6,7 +6,7 @@ import ua.mysite.entity.Brand;
 
 public interface BrandService {
 
-	void save(String brand);
+	void save(Brand brand);
 	
 	Brand findById(int id);
 	

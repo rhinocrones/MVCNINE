@@ -15,13 +15,8 @@ public class BrandServiceImpl implements BrandService {
 	@Autowired
 	private BrandRepository brandRepository;
 
-	public void save(String brand) {
-		if (brandRepository.findByBrand(brand) == null) {
-			Brand brand2 = new Brand();
-			brand2.setBrand(brand);
-			brandRepository.save(brand2);
-		} else
-			System.out.println("Exist");
+	public void save(Brand brand) {
+		brandRepository.save(brand);
 	}
 
 	public Brand findById(int id) {
