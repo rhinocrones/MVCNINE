@@ -2,14 +2,14 @@ package ua.mysite.service;
 
 import java.util.List;
 
+import ua.form.ProductForm;
 import ua.mysite.entity.Product;
 
 public interface ProductService {
 
-	void save(String name, double price, String category, String brand,
-			int size);
+	void save(ProductForm form);
 	
-	Product findById(int id);
+	ProductForm findForForm(int id);
 	
 	void deleteById(int id);
 	

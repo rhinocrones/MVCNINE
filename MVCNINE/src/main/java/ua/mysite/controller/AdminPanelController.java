@@ -37,15 +37,6 @@ public class AdminPanelController {
 	@Autowired
 	private UserOrderService userOrderService;
 
-	@RequestMapping("/adminPanel/product")
-	public String showProduct(Model model) {
-		model.addAttribute("products", productService.products());
-		model.addAttribute("categories", categoryService.findAll());
-		model.addAttribute("brands", brandService.findAll());
-		model.addAttribute("sizes", sizeService.findAll());
-		return "product";
-	}
-
 	@RequestMapping("/adminPanel/usr")
 	public String showUsr(Model model) {
 		model.addAttribute("usrs", usrService.usrs());

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,40 +9,62 @@
 </head>
 <body>
 	<h4>Product menu</h4>
-	<form action="/adminPanel/product" method="post">
+	<form:form action="/adminPanel/product" method="post" modelAttribute="form">
+		<form:hidden path="id" />
 		<table>
 			<tr>
-				<td><select name="category">
+				<td><form:select path="category">
 						<c:forEach items="${categories}" var="category">
-							<option value="${category.category}">${category.category}</option>
+							<c:choose>
+								<c:when test="${category.id eq form.category.id}">
+									<option value="${category.id}" selected="selected">${category.category}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${category.id}">${category.category}</option>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
-				</select></td>
+					</form:select></td>
 			</tr>
-			<tr>
-				<td><select name="brand">
+						<tr>
+				<td><form:select path="brand">
 						<c:forEach items="${brands}" var="brand">
-							<option value="${brand.brand}">${brand.brand}</option>
+							<c:choose>
+								<c:when test="${brand.id eq form.brand.id}">
+									<option value="${brand.id}" selected="selected">${brand.brand}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${brand.id}">${brand.brand}</option>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
-				</select></td>
+					</form:select></td>
 			</tr>
-			<tr>
-				<td><select name="size">
+						<tr>
+				<td><form:select path="size">
 						<c:forEach items="${sizes}" var="size">
-							<option value="${size.size}">${size.size}</option>
+							<c:choose>
+								<c:when test="${size.id eq form.size.id}">
+									<option value="${size.id}" selected="selected">${size.size}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${size.id}">${size.size}</option>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
-				</select></td>
+					</form:select></td>
 			</tr>
 			<tr>
-				<td><input name="name" placeholder="Product name"></td>
+				<td><form:input path="name" placeholder="Product name" /></td>
+			</tr>
+						<tr>
+				<td><form:input path="price" placeholder="Product price" /></td>
 			</tr>
 			<tr>
-				<td><input name="price" placeholder="0.00"></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Submit new product"></td>
+				<td><input type="submit"></td>
 			</tr>
 		</table>
-	</form>
+	</form:form>
 	<table>
 		<tr>
 			<th>Product name</th>

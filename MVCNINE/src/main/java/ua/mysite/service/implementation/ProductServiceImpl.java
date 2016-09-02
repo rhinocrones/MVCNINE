@@ -5,10 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ua.mysite.entity.Brand;
-import ua.mysite.entity.Category;
+import ua.form.ProductForm;
 import ua.mysite.entity.Product;
-import ua.mysite.entity.Size;
 import ua.mysite.repository.BrandRepository;
 import ua.mysite.repository.CategoryRepository;
 import ua.mysite.repository.ProductRepository;
@@ -27,31 +25,15 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
-	public void save(String name, double price, String category, String brand,
-			int size) {
+	public void save(ProductForm form) {
 		Product product = new Product();
-
-		if (name.isEmpty()) {
-			product.setName("");
-		} else {
-			product.setName(name);
-		}
-
-		product.setPrice(price);
-
-		Category category2 = categoryRepository.findByCategory(category);
-		product.setCategory(category2);
-
-		Brand brand2 = brandRepository.findByBrand(brand);
-		product.setBrand(brand2);
-
-		Size size2 = sizeRepository.findBySize(size);
-		product.setSize(size2);
+		product.setId(form.getId());
+		product.setName(form.getName());
+		product.setPrice(Double.parseDouble(form.getPrice()));
+		product.setCategory(form.getCategory());
+		product.setBrand(form.getBrand());
+		product.setSize(form.getSize());
 		productRepository.save(product);
-	}
-
-	public Product findById(int id) {
-		return productRepository.findById(id);
 	}
 
 	public void deleteById(int id) {
@@ -65,6 +47,18 @@ public class ProductServiceImpl implements ProductService {
 
 	public List<Product> products() {
 		return productRepository.products();
+	}
+
+	public ProductForm findForForm(int id) {
+		Product product = productRepository.findOneCategoryBrandSizeInited(id);
+		ProductForm form = new ProductForm();
+		form.setId(product.getId());
+		form.setName(product.getName());
+		form.setPrice(String.valueOf(product.getPrice()));
+		form.setCategory(product.getCategory());
+		form.setBrand(product.getBrand());
+		form.setSize(product.getSize());
+		return form;
 	}
 
 }
