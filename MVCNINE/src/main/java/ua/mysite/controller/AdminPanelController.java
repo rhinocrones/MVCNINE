@@ -2,8 +2,6 @@ package ua.mysite.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import ua.mysite.service.BrandService;
 import ua.mysite.service.CategoryService;
@@ -37,18 +35,5 @@ public class AdminPanelController {
 	@Autowired
 	private UserOrderService userOrderService;
 
-	@RequestMapping("/adminPanel/usr")
-	public String showUsr(Model model) {
-		model.addAttribute("usrs", usrService.usrs());
-		model.addAttribute("roles", roleService.findAll());
-		return "usr";
-	}
 
-	@RequestMapping("/adminPanel/userOrder")
-	public String showUserOrder(Model model) {
-		model.addAttribute("userOrders", userOrderService.userOrders());
-		model.addAttribute("products", productService.findAll());
-		model.addAttribute("usrs", usrService.findAll());
-		return "userOrder";
-	}
 }

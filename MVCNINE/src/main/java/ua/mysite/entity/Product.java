@@ -89,11 +89,4 @@ public class Product {
         this.size = size;
     }
 
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", price=" + price
-				+ ", category=" + category + ", brand=" + brand + ", size="
-				+ size + ", userOrders=" + userOrders + "]";
-	}
-    
 }

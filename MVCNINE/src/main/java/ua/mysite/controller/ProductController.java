@@ -51,6 +51,7 @@ public class ProductController {
 	
 	@RequestMapping("/adminPanel/product")
 	public String showProducts(Model model){
+		model.addAttribute("products", productService.products());
 		model.addAttribute("categories", categoryService.findAll());
 		model.addAttribute("brands", brandService.findAll());
 		model.addAttribute("sizes", sizeService.findAll());
@@ -70,7 +71,7 @@ public class ProductController {
 		model.addAttribute("categories", categoryService.findAll());
 		model.addAttribute("brands", brandService.findAll());
 		model.addAttribute("sizes", sizeService.findAll());
-		return "adminRecipe";
+		return "product";
 	}
 	
 	@RequestMapping(value = "/adminPanel/product/delete/{id}")

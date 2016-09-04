@@ -11,11 +11,12 @@ import ua.mysite.entity.Size;
 public interface SizeRepository extends JpaRepository<Size, Integer> {
 
 	Size findBySize(int size);
-	
+
 	Size findById(int id);
 
 	@Modifying
 	@Transactional
 	@Query("DELETE FROM Size s WHERE s.id=:id")
 	void deleteById(@Param("id") int id);
+
 }

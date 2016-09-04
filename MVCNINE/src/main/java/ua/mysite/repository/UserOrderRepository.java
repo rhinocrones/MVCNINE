@@ -12,7 +12,8 @@ import ua.mysite.entity.UserOrder;
 
 public interface UserOrderRepository extends JpaRepository<UserOrder, Integer> {
 
-	UserOrder findById(int id);
+	@Query("select uo from UserOrder uo left join fetch uo.product left join fetch uo.usr where uo.id=:id")
+	UserOrder findById(@Param("id") int id);
 
 	@Modifying
 	@Query("DELETE FROM UserOrder uo WHERE uo.id=:id")

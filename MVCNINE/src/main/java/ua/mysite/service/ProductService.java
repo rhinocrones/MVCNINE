@@ -11,6 +11,8 @@ public interface ProductService {
 	
 	ProductForm findForForm(int id);
 	
+	Product findById(int id);
+	
 	void deleteById(int id);
 	
 	List<Product> findAll();

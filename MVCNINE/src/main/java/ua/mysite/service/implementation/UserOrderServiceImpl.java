@@ -6,9 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ua.mysite.entity.Product;
 import ua.mysite.entity.UserOrder;
-import ua.mysite.entity.Usr;
 import ua.mysite.repository.ProductRepository;
 import ua.mysite.repository.UserOrderRepository;
 import ua.mysite.repository.UsrRepository;
@@ -26,18 +24,8 @@ public class UserOrderServiceImpl implements UserOrderService {
 	@Autowired
 	private ProductRepository productRepository;
 
-	public void save(String username, String name) {
-		UserOrder userOrder = new UserOrder();
-
-		Usr usr = usrRepository.findByUsername(username);
-		userOrder.setUsr(usr);
-		
-		Product product = productRepository.findByName(name);
-		userOrder.setProduct(product);
-		
-		LocalDateTime localDateTime = LocalDateTime.now();
-		userOrder.setLocalDateTime(localDateTime);
-
+	public void save(UserOrder userOrder) {
+		userOrder.setLocalDateTime(LocalDateTime.now());
 		userOrderRepository.save(userOrder);
 	}
 

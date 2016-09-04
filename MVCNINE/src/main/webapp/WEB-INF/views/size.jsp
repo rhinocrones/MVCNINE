@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h4>Size menu</h4>
-	<form:form action="/adminPanel/size" method="post" modelAttribute="size">
+	<form:form action="/adminPanel/size" method="post" modelAttribute="form">
 		<form:hidden path="id"/>
 		<table>
  			<tr>

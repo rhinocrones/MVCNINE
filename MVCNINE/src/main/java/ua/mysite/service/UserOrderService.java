@@ -6,7 +6,7 @@ import ua.mysite.entity.UserOrder;
 
 public interface UserOrderService {
 
-	void save(String username, String name);
+	void save(UserOrder userOrder);
 	
 	UserOrder findById(int id);
 	

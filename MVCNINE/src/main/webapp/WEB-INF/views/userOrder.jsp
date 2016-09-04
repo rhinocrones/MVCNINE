@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,27 +9,43 @@
 </head>
 <body>
 	<h4>User order menu</h4>
-	<form action="/adminPanel/userOrder" method="post">
+	<form:form action="/adminPanel/userOrder" method="post"
+		modelAttribute="userOrder">
+		<form:hidden path="id" />
 		<table>
 			<tr>
-				<td><select name="username">
-						<c:forEach items="${usrs}" var="usr">
-							<option value="${usr.username}">${usr.username}</option>
-						</c:forEach>
-				</select></td>
-			</tr>
-			<tr>
-				<td><select name="name">
+				<td><form:select path="product">
 						<c:forEach items="${products}" var="product">
-							<option value="${product.name}">${product.name}</option>
+							<c:choose>
+								<c:when test="${product.id eq userOrder.product.id}">
+									<option value="${product.id}" selected="selected">${product.name}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${product.id}">${product.name}</option>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
-				</select></td>
+					</form:select></td>
+			</tr>
+						<tr>
+				<td><form:select path="usr">
+						<c:forEach items="${usrs}" var="usr">
+							<c:choose>
+								<c:when test="${usr.id eq userOrder.usr.id}">
+									<option value="${usr.id}" selected="selected">${usr.username}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${usr.id}">${usr.username}</option>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</form:select></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Submit new user order"></td>
+				<td><input type="submit"></td>
 			</tr>
 		</table>
-	</form>
+	</form:form>
 	<table>
 		<tr>
 			<th>User order</th>

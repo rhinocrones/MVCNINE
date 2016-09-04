@@ -61,4 +61,8 @@ public class ProductServiceImpl implements ProductService {
 		return form;
 	}
 
+	public Product findById(int id) {
+		return productRepository.findById(id);
+	}
+
 }

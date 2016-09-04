@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import ua.mysite.entity.Size;
+import ua.form.SizeForm;
 import ua.mysite.service.SizeService;
 
 @Controller
@@ -17,9 +17,9 @@ public class SizeController {
 	@Autowired
 	private SizeService sizeService;
 
-	@ModelAttribute("size")
-	public Size getSize() {
-		return new Size();
+	@ModelAttribute("form")
+	public SizeForm getSize(){
+		return new SizeForm();
 	}
 
 	@RequestMapping("/adminPanel/size")
@@ -28,9 +28,9 @@ public class SizeController {
 		return "size";
 	}
 
-	@RequestMapping(value = "/adminPanel/size", method = RequestMethod.POST)
-	public String save(@ModelAttribute("size") Size size) {
-		sizeService.save(size);
+	@RequestMapping(value="/adminPanel/size", method=RequestMethod.POST)
+	public String save(@ModelAttribute("form") SizeForm form){
+		sizeService.save(form);
 		return "redirect:/adminPanel/size";
 	}
 
@@ -40,9 +40,9 @@ public class SizeController {
 		return "redirect:/adminPanel/size";
 	}
 
-	@RequestMapping("/adminPanel/size/update/{id}")
-	public String updateSize(@PathVariable int id, Model model) {
-		model.addAttribute("size", sizeService.findById(id));
+	@RequestMapping(value="/adminPanel/size/update/{id}")
+	public String update(Model model, @PathVariable int id){
+		model.addAttribute("form", sizeService.findForForm(id));
 		model.addAttribute("sizes", sizeService.findAll());
 		return "size";
 	}

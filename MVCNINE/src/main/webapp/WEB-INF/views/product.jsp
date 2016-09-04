@@ -9,7 +9,8 @@
 </head>
 <body>
 	<h4>Product menu</h4>
-	<form:form action="/adminPanel/product" method="post" modelAttribute="form">
+	<form:form action="/adminPanel/product" method="post"
+		modelAttribute="form">
 		<form:hidden path="id" />
 		<table>
 			<tr>
@@ -26,7 +27,7 @@
 						</c:forEach>
 					</form:select></td>
 			</tr>
-						<tr>
+			<tr>
 				<td><form:select path="brand">
 						<c:forEach items="${brands}" var="brand">
 							<c:choose>
@@ -40,7 +41,7 @@
 						</c:forEach>
 					</form:select></td>
 			</tr>
-						<tr>
+			<tr>
 				<td><form:select path="size">
 						<c:forEach items="${sizes}" var="size">
 							<c:choose>
@@ -57,7 +58,7 @@
 			<tr>
 				<td><form:input path="name" placeholder="Product name" /></td>
 			</tr>
-						<tr>
+			<tr>
 				<td><form:input path="price" placeholder="Product price" /></td>
 			</tr>
 			<tr>

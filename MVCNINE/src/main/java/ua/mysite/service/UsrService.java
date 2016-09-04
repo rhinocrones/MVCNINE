@@ -6,7 +6,7 @@ import ua.mysite.entity.Usr;
 
 public interface UsrService {
 
-	void save(String username, String email, String password, String role);
+	void save(Usr usr);
 	
 	Usr findById(int id);
 	

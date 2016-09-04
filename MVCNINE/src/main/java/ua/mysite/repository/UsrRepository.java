@@ -14,7 +14,8 @@ public interface UsrRepository extends JpaRepository<Usr, Integer>{
 
 	Usr findByUsername(String username);
 	
-	Usr findById(int id);
+	@Query("select u from Usr u left join fetch u.role where u.id=:id")
+	Usr findById(@Param("id") int id);
 	
 	@Modifying
 	@Query("DELETE FROM Usr u WHERE u.id=:id")
@@ -23,4 +24,6 @@ public interface UsrRepository extends JpaRepository<Usr, Integer>{
 	
 	@Query("select u from Usr u left join fetch u.role")
 	List<Usr> usrs();
+	
+	
 }

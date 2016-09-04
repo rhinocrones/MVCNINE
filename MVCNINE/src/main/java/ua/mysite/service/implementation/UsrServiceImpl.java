@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ua.mysite.entity.Role;
 import ua.mysite.entity.Usr;
 import ua.mysite.repository.RoleRepository;
 import ua.mysite.repository.UsrRepository;
@@ -20,16 +19,7 @@ public class UsrServiceImpl implements UsrService {
 	@Autowired
 	private RoleRepository roleRepository;
 
-	public void save(String username, String email, String password, String role) {
-		Usr usr = new Usr();
-
-		Role role2 = roleRepository.findByRole(role);
-
-		usr.setRole(role2);
-
-		usr.setUsername(username);
-		usr.setEmail(email);
-		usr.setPassword(password);
+	public void save(Usr usr) {
 		usrRepository.save(usr);
 	}
 
