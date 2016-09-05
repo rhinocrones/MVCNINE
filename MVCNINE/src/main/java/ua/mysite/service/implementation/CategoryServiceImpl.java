@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import ua.mysite.entity.Category;
 import ua.mysite.repository.CategoryRepository;
 import ua.mysite.service.CategoryService;
@@ -30,6 +31,10 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<Category> findAll() {
 
 		return categoryRepository.findAll();
+	}
+
+	public Category findByCategory(String category) {
+		return categoryRepository.findByCategory(category);
 	}
 
 }

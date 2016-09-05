@@ -44,4 +44,8 @@ public class SizeServiceImpl implements SizeService {
 
 	}
 
+	public Size findBySize(int size) {
+		return sizeRepository.findBySize(size);
+	}
+
 }

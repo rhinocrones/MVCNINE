@@ -5,6 +5,8 @@ import java.util.List;
 import ua.mysite.entity.Category;
 
 public interface CategoryService {
+	
+	Category findByCategory(String category);
 
 	void save(Category category);
 	

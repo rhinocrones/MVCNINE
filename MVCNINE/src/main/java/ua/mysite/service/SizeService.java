@@ -16,4 +16,6 @@ public interface SizeService {
 	void deleteById(int id);
 	
 	List<Size> findAll();
+
+	Size findBySize(int size);
 }
