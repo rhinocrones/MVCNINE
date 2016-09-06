@@ -56,10 +56,16 @@
 					</form:select></td>
 			</tr>
 			<tr>
+				<td><form:errors path="name" /></td>
+			</tr>
+			<tr>
 				<td><form:input path="name" placeholder="Product name" /></td>
 			</tr>
 			<tr>
-				<td><form:input path="price" placeholder="Product price" /></td>
+				<td><form:errors path="price" /></td>
+			</tr>
+			<tr>
+				<td><form:input path="price" placeholder="000.00" /></td>
 			</tr>
 			<tr>
 				<td><input type="submit"></td>

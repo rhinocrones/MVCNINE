@@ -31,4 +31,8 @@ public class BrandServiceImpl implements BrandService {
 		return brandRepository.findAll();
 	}
 
+	public Brand findByBrand(String brand) {
+		return brandRepository.findByBrand(brand);
+	}
+
 }

@@ -8,6 +8,8 @@ public interface BrandService {
 
 	void save(Brand brand);
 	
+	Brand findByBrand(String brand);
+	
 	Brand findById(int id);
 	
 	void deleteById(int id);

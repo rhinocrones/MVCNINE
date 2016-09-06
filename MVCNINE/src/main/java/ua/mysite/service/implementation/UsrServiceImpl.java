@@ -39,4 +39,16 @@ public class UsrServiceImpl implements UsrService {
 		return usrRepository.usrs();
 	}
 
+	public Usr findByUsername(String username) {
+		return usrRepository.findByUsername(username);
+	}
+
+	public Usr findByEmail(String email) {
+		return usrRepository.findByEmail(email);
+	}
+
+	public Usr findByPassword(String password) {
+		return usrRepository.findByPassword(password);
+	}
+
 }

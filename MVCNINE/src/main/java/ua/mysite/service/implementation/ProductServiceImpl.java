@@ -65,4 +65,8 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.findById(id);
 	}
 
+	public Product findByName(String name) {
+		return productRepository.findByName(name);
+	}
+
 }

@@ -14,6 +14,10 @@ public interface UsrRepository extends JpaRepository<Usr, Integer>{
 
 	Usr findByUsername(String username);
 	
+	Usr findByEmail(String email);
+	
+	Usr findByPassword (String password);
+	
 	@Query("select u from Usr u left join fetch u.role where u.id=:id")
 	Usr findById(@Param("id") int id);
 	

@@ -9,8 +9,7 @@
 </head>
 <body>
 	<h4>User menu</h4>
-	<form:form action="/adminPanel/usr" method="post"
-		modelAttribute="usr">
+	<form:form action="/adminPanel/usr" method="post" modelAttribute="usr">
 		<form:hidden path="id" />
 		<table>
 			<tr>
@@ -28,12 +27,21 @@
 					</form:select></td>
 			</tr>
 			<tr>
+				<td><form:errors path="username" /></td>
+			</tr>
+			<tr>
 				<td><form:input path="username" placeholder="Enter username" /></td>
+			</tr>
+			<tr>
+				<td><form:errors path="email" /></td>
 			</tr>
 			<tr>
 				<td><form:input path="email" placeholder="Enter email" /></td>
 			</tr>
-						<tr>
+			<tr>
+				<td><form:errors path="password" /></td>
+			</tr>
+			<tr>
 				<td><form:input path="password" placeholder="Enter password" /></td>
 			</tr>
 			<tr>

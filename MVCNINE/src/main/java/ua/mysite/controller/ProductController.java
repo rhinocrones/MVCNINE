@@ -1,8 +1,11 @@
 package ua.mysite.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +24,7 @@ import ua.mysite.service.SizeService;
 import ua.mysite.service.implementation.editor.BrandEditor;
 import ua.mysite.service.implementation.editor.CategoryEditor;
 import ua.mysite.service.implementation.editor.SizeEditor;
+import ua.mysite.service.implementation.validator.ProductFormValidator;
 
 @Controller
 public class ProductController {
@@ -37,11 +41,12 @@ public class ProductController {
 	@Autowired 
 	private SizeService sizeService;
 		
-	@InitBinder
+	@InitBinder("form")
 	protected void initBinder(WebDataBinder binder){
 	   binder.registerCustomEditor(Category.class, new CategoryEditor(categoryService));
 	   binder.registerCustomEditor(Brand.class, new BrandEditor(brandService));
 	   binder.registerCustomEditor(Size.class, new SizeEditor(sizeService));
+	   binder.setValidator(new ProductFormValidator(productService));
 	}
 	
 	@ModelAttribute("form")
@@ -59,7 +64,14 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/adminPanel/product", method=RequestMethod.POST)
-	public String save(@ModelAttribute("form") ProductForm form){
+	public String save(@ModelAttribute("form") @Valid ProductForm form, BindingResult br, Model model){
+		if(br.hasErrors()){
+			model.addAttribute("products", productService.products());
+			model.addAttribute("categories", categoryService.findAll());
+			model.addAttribute("brands", brandService.findAll());
+			model.addAttribute("sizes", sizeService.findAll());
+			return "product";
+		}
 		productService.save(form);
 		return "redirect:/adminPanel/product";
 	}

@@ -1,8 +1,13 @@
 package ua.mysite.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import ua.mysite.entity.Role;
 import ua.mysite.service.RoleService;
+import ua.mysite.service.implementation.validator.RoleValidator;
 
 @Controller
 public class RoleController {
@@ -21,6 +27,11 @@ public class RoleController {
 	public Role getRole() {
 		return new Role();
 	}
+	
+	@InitBinder("role")
+	protected void initBinder(WebDataBinder binder){
+		binder.setValidator(new RoleValidator(roleService));
+	}
 
 	@RequestMapping("/adminPanel/role")
 	public String showRole(Model model) {
@@ -28,8 +39,12 @@ public class RoleController {
 		return "role";
 	}
 
-	@RequestMapping(value = "/adminPanel/role", method = RequestMethod.POST)
-	public String save(@ModelAttribute("role") Role role) {
+	@RequestMapping(value= "/adminPanel/role", method=RequestMethod.POST)
+	public String save(@ModelAttribute("role") @Valid Role role, BindingResult br, Model model){
+		if(br.hasErrors()){
+			model.addAttribute("roles", roleService.findAll());
+			return "role";
+		}
 		roleService.save(role);
 		return "redirect:/adminPanel/role";
 	}
