@@ -27,15 +27,33 @@
 		<tr>
 			<th>Category name</th>
 		</tr>
-		<c:forEach items="${categories}" var="category">
+		<c:forEach items="${page.content}" var="category">
 			<tr>
 				<td>${category.category}</td>
-				<td><a href="/adminPanel/category/delete/${category.id}">delete</a>
+				<td><a href="/adminPanel/category/delete/${category.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}">delete</a>
 				</td>
 				<td><a href="/adminPanel/category/update/${category.id}">update</a>
 				</td>
 			</tr>
 		</c:forEach>
+		<tr>
+				<c:if test="${!page.isFirst()}">
+					<td><a href="?page=${page.number}&size=${page.size}&sort=${param['sort']}">Previous</a></td>
+				</c:if>
+				<c:if test="${!page.isLast()}">
+					<td><a href="?page=${page.number+2}&size=${page.size}&sort=${param['sort']}">Next</a></td>
+				</c:if>
+			</tr>
+			<tr>
+				<td><a href="?page=1&size=1&sort=${param['sort']}">1</a></td>
+				<td><a href="?page=1&size=5&sort=${param['sort']}">5</a></td>
+				<td><a href="?page=1&size=10&sort=${param['sort']}">10</a></td>
+				<td><a href="?page=1&size=20&sort=${param['sort']}">20</a></td>
+			</tr>
+			<tr>
+				<td><a href="?page=1&size=${page.size}&sort=category">Name asc</a></td>
+				<td><a href="?page=1&size=${page.size}&sort=category,desc">Name desc</a></td>
+			</tr>
 	</table>
 	<hr>
 	<a href="/adminPanel">Back to admin panel</a>
