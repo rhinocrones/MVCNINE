@@ -2,6 +2,9 @@ package ua.mysite.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import ua.mysite.entity.Brand;
 
 public interface BrandService {
@@ -15,5 +18,7 @@ public interface BrandService {
 	void deleteById(int id);
 	
 	List<Brand> findAll();
+	
+	Page<Brand> findAll(Pageable pageable);
 	
 }

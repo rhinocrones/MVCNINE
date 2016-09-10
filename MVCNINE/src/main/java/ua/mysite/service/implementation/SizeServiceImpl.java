@@ -3,6 +3,8 @@ package ua.mysite.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.form.SizeForm;
@@ -46,6 +48,10 @@ public class SizeServiceImpl implements SizeService {
 
 	public Size findBySize(int size) {
 		return sizeRepository.findBySize(size);
+	}
+
+	public Page<Size> findAll(Pageable pageable) {
+		return sizeRepository.findAll(pageable);
 	}
 
 }

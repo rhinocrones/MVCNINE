@@ -27,7 +27,7 @@
 						</c:forEach>
 					</form:select></td>
 			</tr>
-						<tr>
+			<tr>
 				<td><form:select path="usr">
 						<c:forEach items="${usrs}" var="usr">
 							<c:choose>
@@ -50,16 +50,47 @@
 		<tr>
 			<th>User order</th>
 		</tr>
-		<c:forEach items="${userOrders}" var="userOrder">
+		<c:forEach items="${page.content}" var="userOrder">
 			<tr>
 				<td>${userOrder.id}</td>
 				<td>${userOrder.usr.username}</td>
 				<td>${userOrder.product.name}</td>
 				<td>${userOrder.localDateTime}</td>
-				<td><a href="/adminPanel/userOrder/delete/${userOrder.id}">delete</a></td>
+				<td><a
+					href="/adminPanel/userOrder/delete/${userOrder.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}">delete</a></td>
 				<td><a href="/adminPanel/userOrder/update/${userOrder.id}">update</a></td>
 			</tr>
 		</c:forEach>
+		<tr>
+			<c:if test="${!page.isFirst()}">
+				<td><a
+					href="?page=${page.number}&size=${page.size}&sort=${param['sort']}">Previous</a></td>
+			</c:if>
+			<c:if test="${!page.isLast()}">
+				<td><a
+					href="?page=${page.number+2}&size=${page.size}&sort=${param['sort']}">Next</a></td>
+			</c:if>
+		</tr>
+		<tr>
+			<td><a href="?page=1&size=1&sort=${param['sort']}">1</a></td>
+			<td><a href="?page=1&size=5&sort=${param['sort']}">5</a></td>
+			<td><a href="?page=1&size=10&sort=${param['sort']}">10</a></td>
+			<td><a href="?page=1&size=20&sort=${param['sort']}">20</a></td>
+		</tr>
+		<tr>
+			<td><a href="?page=1&size=${page.size}&sort=usr.username">Username
+					asc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=usr.username,desc">Username
+					desc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=product.name">Product
+					name asc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=product.name,desc">Product
+					name desc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=localDateTime">Time
+					 asc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=localDateTime,desc">Time
+					 desc</a></td>
+		</tr>
 	</table>
 	<hr>
 	<a href="/adminPanel">Back to admin panel</a>

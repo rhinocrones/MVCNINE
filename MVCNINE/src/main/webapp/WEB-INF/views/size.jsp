@@ -24,16 +24,36 @@
 		</table>
 	</form:form>
 	<table>
-		<tr>
+<tr>
 			<th>Size name</th>
 		</tr>
-		<c:forEach items="${sizes}" var="size">
+		<c:forEach items="${page.content}" var="size">
 			<tr>
 				<td>${size.size}</td>
-				<td><a href="/adminPanel/size/delete/${size.id}">delete</a></td>
-				<td><a href="/adminPanel/size/update/${size.id}">update</a></td>
+				<td><a href="/adminPanel/size/delete/${size.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}">delete</a>
+				</td>
+				<td><a href="/adminPanel/size/update/${size.id}">update</a>
+				</td>
 			</tr>
 		</c:forEach>
+		<tr>
+				<c:if test="${!page.isFirst()}">
+					<td><a href="?page=${page.number}&size=${page.size}&sort=${param['sort']}">Previous</a></td>
+				</c:if>
+				<c:if test="${!page.isLast()}">
+					<td><a href="?page=${page.number+2}&size=${page.size}&sort=${param['sort']}">Next</a></td>
+				</c:if>
+			</tr>
+			<tr>
+				<td><a href="?page=1&size=1&sort=${param['sort']}">1</a></td>
+				<td><a href="?page=1&size=5&sort=${param['sort']}">5</a></td>
+				<td><a href="?page=1&size=10&sort=${param['sort']}">10</a></td>
+				<td><a href="?page=1&size=20&sort=${param['sort']}">20</a></td>
+			</tr>
+			<tr>
+				<td><a href="?page=1&size=${page.size}&sort=size">Size asc</a></td>
+				<td><a href="?page=1&size=${page.size}&sort=size,desc">Size desc</a></td>
+			</tr>
 	</table>
 	<hr>
 	<a href="/adminPanel">Back to admin panel</a>

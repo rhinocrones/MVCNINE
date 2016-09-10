@@ -3,6 +3,8 @@ package ua.mysite.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.mysite.entity.Usr;
@@ -49,6 +51,10 @@ public class UsrServiceImpl implements UsrService {
 
 	public Usr findByPassword(String password) {
 		return usrRepository.findByPassword(password);
+	}
+
+	public Page<Usr> findAll(Pageable pageable) {
+		return usrRepository.findAll(pageable);
 	}
 
 }

@@ -64,7 +64,7 @@ public class CategoryController {
 				+ "&sort=" + sort;
 	}
 
-	@RequestMapping("/adminPanel/category/update/{id}")
+	@RequestMapping(value="/adminPanel/category/update/{id}")
 	public String updateCategory(
 			@PathVariable int id,
 			Model model, @PageableDefault(5) Pageable pageable) {

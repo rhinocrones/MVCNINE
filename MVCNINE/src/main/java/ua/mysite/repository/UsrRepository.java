@@ -2,6 +2,8 @@ package ua.mysite.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -29,5 +31,7 @@ public interface UsrRepository extends JpaRepository<Usr, Integer>{
 	@Query("select u from Usr u left join fetch u.role")
 	List<Usr> usrs();
 	
-	
+	@Query(value = "select u from Usr u left join fetch u.role",
+			countQuery="SELECT count(u.id) from Usr u")
+	Page<Usr> findAll(Pageable pageable);
 }

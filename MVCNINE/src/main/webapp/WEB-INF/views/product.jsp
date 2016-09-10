@@ -76,19 +76,58 @@
 		<tr>
 			<th>Product name</th>
 		</tr>
-		<c:forEach items="${products}" var="product">
+		<c:forEach items="${page.content}" var="product">
 			<tr>
 				<td>${product.name}</td>
 				<td>${product.price}</td>
 				<td>${product.category.category}</td>
 				<td>${product.brand.brand}</td>
 				<td>${product.size.size}</td>
-				<td><a href="/adminPanel/product/delete/${product.id}">delete</a>
+				<td><a
+					href="/adminPanel/product/delete/${product.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}">delete</a>
 				</td>
 				<td><a href="/adminPanel/product/update/${product.id}">update</a>
 				</td>
 			</tr>
 		</c:forEach>
+		<tr>
+			<c:if test="${!page.isFirst()}">
+				<td><a
+					href="?page=${page.number}&size=${page.size}&sort=${param['sort']}">Previous</a></td>
+			</c:if>
+			<c:if test="${!page.isLast()}">
+				<td><a
+					href="?page=${page.number+2}&size=${page.size}&sort=${param['sort']}">Next</a></td>
+			</c:if>
+		</tr>
+		<tr>
+			<td><a href="?page=1&size=1&sort=${param['sort']}">1</a></td>
+			<td><a href="?page=1&size=5&sort=${param['sort']}">5</a></td>
+			<td><a href="?page=1&size=10&sort=${param['sort']}">10</a></td>
+			<td><a href="?page=1&size=20&sort=${param['sort']}">20</a></td>
+		</tr>
+		<tr>
+			<td><a href="?page=1&size=${page.size}&sort=name">Product
+					name asc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=name,desc">Product
+					name desc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=price">Product
+					price asc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=price,desc">Product
+					price desc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=category.category">Product
+					category asc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=category.category,desc">Product
+					category desc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=brand.brand">Product
+					brand asc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=brand.brand,desc">Product
+					brand desc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=size.size">Product
+					size asc</a></td>
+			<td><a href="?page=1&size=${page.size}&sort=size.size,desc">Product
+					size desc</a></td>
+		</tr>
 	</table>
 	<hr>
 	<a href="/adminPanel">Back to admin panel</a>

@@ -3,6 +3,8 @@ package ua.mysite.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.mysite.entity.Role;
@@ -34,6 +36,10 @@ public class RoleServiceImpl implements RoleService {
 
 	public Role findByRole(String role) {
 		return roleRepository.findByRole(role);
+	}
+
+	public Page<Role> findAll(Pageable pageable) {
+		return roleRepository.findAll(pageable);
 	}
 
 }

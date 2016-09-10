@@ -3,6 +3,8 @@ package ua.mysite.service.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.form.ProductForm;
@@ -67,6 +69,10 @@ public class ProductServiceImpl implements ProductService {
 
 	public Product findByName(String name) {
 		return productRepository.findByName(name);
+	}
+
+	public Page<Product> findAll(Pageable pageable) {
+		return productRepository.findAll(pageable);
 	}
 
 }

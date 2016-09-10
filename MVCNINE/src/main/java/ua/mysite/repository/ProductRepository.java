@@ -2,6 +2,8 @@ package ua.mysite.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -27,4 +29,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	@Query("select p from Product p left join fetch p.category left join fetch p.brand left join fetch p.size where p.id=:id")
 	Product findOneCategoryBrandSizeInited(@Param("id") int id);
 
+	@Query(value = "select p from Product p left join fetch p.category left join fetch p.brand left join fetch p.size", countQuery = "SELECT count(p.id) from Product p")
+	Page<Product> findAll(Pageable pageable);
 }

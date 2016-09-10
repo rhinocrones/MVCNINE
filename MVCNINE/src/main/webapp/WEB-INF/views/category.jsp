@@ -51,8 +51,8 @@
 				<td><a href="?page=1&size=20&sort=${param['sort']}">20</a></td>
 			</tr>
 			<tr>
-				<td><a href="?page=1&size=${page.size}&sort=category">Name asc</a></td>
-				<td><a href="?page=1&size=${page.size}&sort=category,desc">Name desc</a></td>
+				<td><a href="?page=1&size=${page.size}&sort=category">Category asc</a></td>
+				<td><a href="?page=1&size=${page.size}&sort=category,desc">Category desc</a></td>
 			</tr>
 	</table>
 	<hr>
