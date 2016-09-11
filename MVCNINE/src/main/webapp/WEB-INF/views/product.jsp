@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="/WEB-INF/custom.tld" prefix="custom"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
@@ -128,6 +129,9 @@
 			<td><a href="?page=1&size=${page.size}&sort=size.size,desc">Product
 					size desc</a></td>
 		</tr>
+	</table>
+	<table>
+		<custom:pageable page="${page}" cell="<li></li>" container="<ul class='pagination'></ul>"/>
 	</table>
 	<hr>
 	<a href="/adminPanel">Back to admin panel</a>
