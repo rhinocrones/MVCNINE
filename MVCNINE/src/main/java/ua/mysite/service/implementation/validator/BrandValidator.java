@@ -22,7 +22,7 @@ public class BrandValidator implements Validator {
 		Brand brand = (Brand) target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "brand", "",
 				"Brand name can't be empty");
-		if (brandService.findByBrand(brand.getBrand()) != null) {
+		if(brand.getId()==0)if (brandService.findByBrand(brand.getBrand()) != null) {
 			errors.rejectValue("brand", "",
 					"Brand with this name already exists");
 		}

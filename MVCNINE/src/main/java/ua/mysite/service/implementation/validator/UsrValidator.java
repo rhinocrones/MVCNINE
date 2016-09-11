@@ -26,13 +26,13 @@ public class UsrValidator implements Validator {
 		Usr usr = (Usr) target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "",
 				"Username can't be empty");
-		if (usrService.findByUsername(usr.getUsername()) != null) {
+		if(usr.getId()==0)if (usrService.findByUsername(usr.getUsername()) != null) {
 			errors.rejectValue("username", "",
 					"User with this username already exists");
 		}
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "",
 				"Email can't be empty");
-		if (usrService.findByEmail(usr.getEmail()) != null) {
+		if(usr.getId()==0)if (usrService.findByEmail(usr.getEmail()) != null) {
 			errors.rejectValue("email", "", "User with this email"
 					+ " already exists");
 		}

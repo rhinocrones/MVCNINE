@@ -22,7 +22,7 @@ public class CategoryValidator implements Validator{
 	public void validate(Object target, Errors errors) {
 		Category category = (Category) target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "category", "", "Category name can't be empty");
-		if(categoryService.findByCategory(category.getCategory())!=null){
+		if(category.getId()==0)if(categoryService.findByCategory(category.getCategory())!=null){
 			errors.rejectValue("category", "", "Category with this name already exists");
 		}
 		

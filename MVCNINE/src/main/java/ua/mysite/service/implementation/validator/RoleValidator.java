@@ -22,7 +22,7 @@ public class RoleValidator implements Validator {
 		Role role = (Role) target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "role", "",
 				"Role can't be empty");
-		if (roleService.findByRole(role.getRole()) != null) {
+		if(role.getId()==0)if (roleService.findByRole(role.getRole()) != null) {
 			errors.rejectValue("role", "",
 					"Role with this name already exists");
 		}
