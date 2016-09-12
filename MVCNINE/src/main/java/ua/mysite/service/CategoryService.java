@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import ua.form.CategoryFilter;
 import ua.mysite.entity.Category;
 
 public interface CategoryService {
@@ -20,4 +21,6 @@ public interface CategoryService {
 	List<Category> findAll();
 
 	Page<Category> findAll(Pageable pageable);
+	
+	Page<Category> findAll(Pageable pageable, CategoryFilter form);
 }
