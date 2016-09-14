@@ -8,23 +8,24 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import ua.form.CategoryFilter;
-import ua.mysite.entity.Category;
+import ua.form.SizeFormFilter;
+import ua.mysite.entity.Size;
 
-public class CategoryFilterAdapter implements Specification<Category> {
+public class SizeFormFilterAdapter implements Specification<Size> {
 
 	private String search = "";
 
-	public CategoryFilterAdapter(CategoryFilter form) {
+	public SizeFormFilterAdapter(SizeFormFilter form) {
 		search = form.getSearch();
 	}
 
-	public Predicate toPredicate(Root<Category> root, CriteriaQuery<?> query,
+	@Override
+	public Predicate toPredicate(Root<Size> root, CriteriaQuery<?> query,
 			CriteriaBuilder cb) {
 		if (query.getResultType() != Long.class
 				&& query.getResultType() != long.class) {
 		}
-		Expression<String> exp = root.get("category");
+		Expression<String> exp = root.get("size");
 		return cb.like(cb.upper(exp), search.toUpperCase() + "%");
 	}
 

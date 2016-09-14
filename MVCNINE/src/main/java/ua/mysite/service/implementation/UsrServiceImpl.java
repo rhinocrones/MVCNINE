@@ -7,10 +7,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import ua.form.UsrFilter;
 import ua.mysite.entity.Usr;
 import ua.mysite.repository.RoleRepository;
 import ua.mysite.repository.UsrRepository;
 import ua.mysite.service.UsrService;
+import ua.mysite.service.implementation.specification.UsrFilterAdapter;
 
 @Service
 public class UsrServiceImpl implements UsrService {
@@ -55,6 +57,11 @@ public class UsrServiceImpl implements UsrService {
 
 	public Page<Usr> findAll(Pageable pageable) {
 		return usrRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Usr> findAll(Pageable pageable, UsrFilter form) {
+		return usrRepository.findAll(new UsrFilterAdapter(form), pageable);
 	}
 
 }

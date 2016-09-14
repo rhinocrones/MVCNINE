@@ -7,9 +7,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import ua.form.BrandFilter;
 import ua.mysite.entity.Brand;
 import ua.mysite.repository.BrandRepository;
 import ua.mysite.service.BrandService;
+import ua.mysite.service.implementation.specification.BrandFilterAdapter;
 
 @Service
 public class BrandServiceImpl implements BrandService {
@@ -39,6 +41,11 @@ public class BrandServiceImpl implements BrandService {
 
 	public Page<Brand> findAll(Pageable pageable) {
 		return brandRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Brand> findAll(Pageable pageable, BrandFilter form) {
+		return brandRepository.findAll(new BrandFilterAdapter(form), pageable);
 	}
 
 }

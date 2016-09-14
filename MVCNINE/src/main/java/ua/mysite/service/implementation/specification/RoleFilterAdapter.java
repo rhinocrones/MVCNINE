@@ -8,23 +8,24 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import ua.form.CategoryFilter;
-import ua.mysite.entity.Category;
+import ua.form.RoleFilter;
+import ua.mysite.entity.Role;
 
-public class CategoryFilterAdapter implements Specification<Category> {
+public class RoleFilterAdapter implements Specification<Role> {
 
 	private String search = "";
 
-	public CategoryFilterAdapter(CategoryFilter form) {
+	public RoleFilterAdapter(RoleFilter form) {
 		search = form.getSearch();
 	}
 
-	public Predicate toPredicate(Root<Category> root, CriteriaQuery<?> query,
+	@Override
+	public Predicate toPredicate(Root<Role> root, CriteriaQuery<?> query,
 			CriteriaBuilder cb) {
 		if (query.getResultType() != Long.class
 				&& query.getResultType() != long.class) {
 		}
-		Expression<String> exp = root.get("category");
+		Expression<String> exp = root.get("role");
 		return cb.like(cb.upper(exp), search.toUpperCase() + "%");
 	}
 

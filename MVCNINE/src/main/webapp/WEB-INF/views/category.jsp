@@ -15,7 +15,9 @@
 		<form:hidden path="id" />
 		<c:forEach items="${param}" var="parameter">
 			<c:forEach items="${parameter.value}" var="value">
-				<input type="hidden" name="${parameter.key}" value="${value}">
+				<c:if test="${parameter.key ne 'category' and parameter.key ne 'id'}">
+					<input type="hidden" name="${parameter.key}" value="${value}">
+				</c:if>
 			</c:forEach>
 		</c:forEach>
 		<table>
@@ -29,8 +31,9 @@
 				<td><input type="submit"></td>
 			</tr>
 		</table>
-	</form:form>
-		<form:form action="/adminPanel/category" method="get" modelAttribute="filter">
+	</form:form>	
+	<form:form action="/adminPanel/category" method="get"
+		modelAttribute="filter">
 		<c:forEach items="${param}" var="parameter">
 			<c:forEach items="${parameter.value}" var="value">
 				<c:if test="${parameter.key ne 'search'}">
@@ -40,7 +43,8 @@
 		</c:forEach>
 		<table>
 			<tr>
-				<td><form:input path="search" placeholder="search"/><input type="submit" value="ok"></td>
+				<td><form:input path="search" placeholder="search" /><input
+					type="submit" value="ok"></td>
 			</tr>
 		</table>
 	</form:form>

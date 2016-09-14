@@ -13,6 +13,13 @@
 	<form:form action="/adminPanel/product" method="post"
 		modelAttribute="form">
 		<form:hidden path="id" />
+		<c:forEach items="${param}" var="parameter">
+			<c:forEach items="${parameter.value}" var="value">
+				<c:if test="${parameter.key ne 'name' and parameter.key ne 'id'}">
+					<input type="hidden" name="${parameter.key}" value="${value}">
+				</c:if>
+			</c:forEach>
+		</c:forEach>
 		<table>
 			<tr>
 				<td><form:select path="category">
@@ -73,6 +80,22 @@
 			</tr>
 		</table>
 	</form:form>
+	<form:form action="/adminPanel/product" method="get"
+		modelAttribute="filter">
+		<c:forEach items="${param}" var="parameter">
+			<c:forEach items="${parameter.value}" var="value">
+				<c:if test="${parameter.key ne 'search'}">
+					<input type="hidden" name="${parameter.key}" value="${value}">
+				</c:if>
+			</c:forEach>
+		</c:forEach>
+		<table>
+			<tr>
+				<td><form:input path="search" placeholder="search" /><input
+					type="submit" value="ok"></td>
+			</tr>
+		</table>
+	</form:form>
 	<table>
 		<tr>
 			<th>Product name</th>
@@ -85,54 +108,51 @@
 				<td>${product.brand.brand}</td>
 				<td>${product.size.size}</td>
 				<td><a
-					href="/adminPanel/product/delete/${product.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}">delete</a>
+					href="/adminPanel/product/delete/${product.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}&search=${param['search']}">delete</a>
 				</td>
-				<td><a href="/adminPanel/product/update/${product.id}">update</a>
+				<td><a
+					href="/adminPanel/product/update/${product.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}&search=${param['search']}">update</a>
 				</td>
 			</tr>
 		</c:forEach>
 		<tr>
-			<c:if test="${!page.isFirst()}">
-				<td><a
-					href="?page=${page.number}&size=${page.size}&sort=${param['sort']}">Previous</a></td>
-			</c:if>
-			<c:if test="${!page.isLast()}">
-				<td><a
-					href="?page=${page.number+2}&size=${page.size}&sort=${param['sort']}">Next</a></td>
-			</c:if>
+			<td><a
+				href="?page=1&size=1&sort=${param['sort']}&search=${param['search']}">1</a></td>
+			<td><a
+				href="?page=1&size=5&sort=${param['sort']}&search=${param['search']}">5</a></td>
+			<td><a
+				href="?page=1&size=10&sort=${param['sort']}&search=${param['search']}">10</a></td>
+			<td><a
+				href="?page=1&size=20&sort=${param['sort']}&search=${param['search']}">20</a></td>
 		</tr>
 		<tr>
-			<td><a href="?page=1&size=1&sort=${param['sort']}">1</a></td>
-			<td><a href="?page=1&size=5&sort=${param['sort']}">5</a></td>
-			<td><a href="?page=1&size=10&sort=${param['sort']}">10</a></td>
-			<td><a href="?page=1&size=20&sort=${param['sort']}">20</a></td>
-		</tr>
-		<tr>
-			<td><a href="?page=1&size=${page.size}&sort=name">Product
+			<td><a href="?page=1&size=${page.size}&sort=name&search=${param['search']}">Product
 					name asc</a></td>
-			<td><a href="?page=1&size=${page.size}&sort=name,desc">Product
+			<td><a href="?page=1&size=${page.size}&sort=name,desc&search=${param['search']}">Product
 					name desc</a></td>
-			<td><a href="?page=1&size=${page.size}&sort=price">Product
+			<td><a href="?page=1&size=${page.size}&sort=price&search=${param['search']}">Product
 					price asc</a></td>
-			<td><a href="?page=1&size=${page.size}&sort=price,desc">Product
+			<td><a href="?page=1&size=${page.size}&sort=price,desc&search=${param['search']}">Product
 					price desc</a></td>
-			<td><a href="?page=1&size=${page.size}&sort=category.category">Product
+			<td><a href="?page=1&size=${page.size}&sort=category.category&search=${param['search']}">Product
 					category asc</a></td>
-			<td><a href="?page=1&size=${page.size}&sort=category.category,desc">Product
+			<td><a
+				href="?page=1&size=${page.size}&sort=category.category,desc&search=${param['search']}">Product
 					category desc</a></td>
-			<td><a href="?page=1&size=${page.size}&sort=brand.brand">Product
+			<td><a href="?page=1&size=${page.size}&sort=brand.brand&search=${param['search']}">Product
 					brand asc</a></td>
-			<td><a href="?page=1&size=${page.size}&sort=brand.brand,desc">Product
+			<td><a href="?page=1&size=${page.size}&sort=brand.brand,desc&search=${param['search']}">Product
 					brand desc</a></td>
-			<td><a href="?page=1&size=${page.size}&sort=size.size">Product
+			<td><a href="?page=1&size=${page.size}&sort=size.size&search=${param['search']}">Product
 					size asc</a></td>
-			<td><a href="?page=1&size=${page.size}&sort=size.size,desc">Product
+			<td><a href="?page=1&size=${page.size}&sort=size.size,desc&search=${param['search']}">Product
 					size desc</a></td>
 		</tr>
 	</table>
-	<table>
-		<custom:pageable page="${page}" cell="<li></li>" container="<ul class='pagination'></ul>"/>
-	</table>
+	<div class="col-md-12 text-center">
+		<custom:pageable page="${page}" cell="<li></li>"
+			container="<ul class='pagination'></ul>" />
+	</div>
 	<hr>
 	<a href="/adminPanel">Back to admin panel</a>
 	<hr>

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import ua.form.ProductForm;
+import ua.form.ProductFormFilter;
 import ua.mysite.entity.Product;
 
 public interface ProductService {
@@ -25,4 +26,6 @@ public interface ProductService {
 	List<Product> products();
 	
 	Page<Product> findAll(Pageable pageable);
+	
+	Page<Product> findAll(Pageable pageable, ProductFormFilter form);
 }

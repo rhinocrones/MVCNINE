@@ -8,23 +8,23 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import ua.form.CategoryFilter;
-import ua.mysite.entity.Category;
+import ua.form.BrandFilter;
+import ua.mysite.entity.Brand;
 
-public class CategoryFilterAdapter implements Specification<Category> {
+public class BrandFilterAdapter implements Specification<Brand> {
 
 	private String search = "";
 
-	public CategoryFilterAdapter(CategoryFilter form) {
+	public BrandFilterAdapter(BrandFilter form) {
 		search = form.getSearch();
 	}
 
-	public Predicate toPredicate(Root<Category> root, CriteriaQuery<?> query,
+	public Predicate toPredicate(Root<Brand> root, CriteriaQuery<?> query,
 			CriteriaBuilder cb) {
 		if (query.getResultType() != Long.class
 				&& query.getResultType() != long.class) {
 		}
-		Expression<String> exp = root.get("category");
+		Expression<String> exp = root.get("brand");
 		return cb.like(cb.upper(exp), search.toUpperCase() + "%");
 	}
 

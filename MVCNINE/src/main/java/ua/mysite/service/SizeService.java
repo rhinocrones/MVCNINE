@@ -1,10 +1,12 @@
 package ua.mysite.service;
 
 import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import ua.form.SizeForm;
+import ua.form.SizeFormFilter;
 import ua.mysite.entity.Size;
 
 public interface SizeService {
@@ -22,4 +24,6 @@ public interface SizeService {
 	Size findBySize(int size);
 	
 	Page<Size> findAll(Pageable pageable);
+	
+	Page<Size> findAll(Pageable pageable, SizeFormFilter form);
 }

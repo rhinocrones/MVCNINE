@@ -35,7 +35,6 @@ public class PageableTag extends SimpleTagSupport{
 	private String endContainer = "</tr>";
 	private String stCell = "<td>";
 	private String endCell = "</td>";
-	private String dotClass = "dots";
 	private String activeClass = "active";
 	
 	@Override

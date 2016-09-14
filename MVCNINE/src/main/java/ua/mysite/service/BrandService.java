@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import ua.form.BrandFilter;
 import ua.mysite.entity.Brand;
 
 public interface BrandService {
@@ -20,5 +21,7 @@ public interface BrandService {
 	List<Brand> findAll();
 	
 	Page<Brand> findAll(Pageable pageable);
+	
+	Page<Brand> findAll(Pageable pageable, BrandFilter form);
 	
 }

@@ -12,6 +12,14 @@
 	<h4>User menu</h4>
 	<form:form action="/adminPanel/usr" method="post" modelAttribute="usr">
 		<form:hidden path="id" />
+		<c:forEach items="${param}" var="parameter">
+			<c:forEach items="${parameter.value}" var="value">
+				<c:if
+					test="${parameter.key ne 'username' and parameter.key ne 'id'}">
+					<input type="hidden" name="${parameter.key}" value="${value}">
+				</c:if>
+			</c:forEach>
+		</c:forEach>
 		<table>
 			<tr>
 				<td><form:select path="role">
@@ -50,6 +58,22 @@
 			</tr>
 		</table>
 	</form:form>
+	<form:form action="/adminPanel/usr" method="get"
+		modelAttribute="filter">
+		<c:forEach items="${param}" var="parameter">
+			<c:forEach items="${parameter.value}" var="value">
+				<c:if test="${parameter.key ne 'search'}">
+					<input type="hidden" name="${parameter.key}" value="${value}">
+				</c:if>
+			</c:forEach>
+		</c:forEach>
+		<table>
+			<tr>
+				<td><form:input path="search" placeholder="search" /><input
+					type="submit" value="ok"></td>
+			</tr>
+		</table>
+	</form:form>
 	<table>
 		<tr>
 			<th>User name</th>
@@ -60,40 +84,43 @@
 				<td>${usr.role.role}</td>
 				<td>${usr.email}</td>
 				<td>${usr.password}</td>
-				<td><a href="/adminPanel/usr/delete/${usr.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}">delete</a>
-				<td><a href="/adminPanel/usr/update/${usr.id}">update</a>
+				<td><a
+					href="/adminPanel/usr/delete/${usr.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}&search=${param['search']}">delete</a>
+				</td>
+				<td><a
+					href="/adminPanel/usr/update/${usr.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}&search=${param['search']}">update</a>
+				</td>
 			</tr>
 		</c:forEach>
 		<tr>
-			<c:if test="${!page.isFirst()}">
-				<td><a
-					href="?page=${page.number}&size=${page.size}&sort=${param['sort']}">Previous</a></td>
-			</c:if>
-			<c:if test="${!page.isLast()}">
-				<td><a
-					href="?page=${page.number+2}&size=${page.size}&sort=${param['sort']}">Next</a></td>
-			</c:if>
+			<td><a
+				href="?page=1&size=1&sort=${param['sort']}&search=${param['search']}">1</a></td>
+			<td><a
+				href="?page=1&size=5&sort=${param['sort']}&search=${param['search']}">5</a></td>
+			<td><a
+				href="?page=1&size=10&sort=${param['sort']}&search=${param['search']}">10</a></td>
+			<td><a
+				href="?page=1&size=20&sort=${param['sort']}&search=${param['search']}">20</a></td>
 		</tr>
 		<tr>
-			<td><a href="?page=1&size=1&sort=${param['sort']}">1</a></td>
-			<td><a href="?page=1&size=5&sort=${param['sort']}">5</a></td>
-			<td><a href="?page=1&size=10&sort=${param['sort']}">10</a></td>
-			<td><a href="?page=1&size=20&sort=${param['sort']}">20</a></td>
-		</tr>
-		<tr>
-			<td><a href="?page=1&size=${page.size}&sort=username">Username
+			<td><a
+				href="?page=1&size=${page.size}&sort=username&search=${param['search']}">Username
 					asc</a></td>
-			<td><a href="?page=1&size=${page.size}&sort=username,desc">Username
+			<td><a
+				href="?page=1&size=${page.size}&sort=username,desc&search=${param['search']}">Username
 					desc</a></td>
-			<td><a href="?page=1&size=${page.size}&sort=role.role">Role
+			<td><a
+				href="?page=1&size=${page.size}&sort=role.role&search=${param['search']}">Role
 					asc</a></td>
-			<td><a href="?page=1&size=${page.size}&sort=role.role,desc">Role
+			<td><a
+				href="?page=1&size=${page.size}&sort=role.role,desc&search=${param['search']}">Role
 					desc</a></td>
 		</tr>
 	</table>
-	<table>
-		<custom:pageable page="${page}" cell="<li></li>" container="<ul class='pagination'></ul>"/>
-	</table>
+	<div class="col-md-12 text-center">
+		<custom:pageable page="${page}" cell="<li></li>"
+			container="<ul class='pagination'></ul>" />
+	</div>
 	<hr>
 	<a href="/adminPanel">Back to admin panel</a>
 	<hr>

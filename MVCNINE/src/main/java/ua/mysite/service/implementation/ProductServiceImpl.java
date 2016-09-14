@@ -8,12 +8,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import ua.form.ProductForm;
+import ua.form.ProductFormFilter;
 import ua.mysite.entity.Product;
 import ua.mysite.repository.BrandRepository;
 import ua.mysite.repository.CategoryRepository;
 import ua.mysite.repository.ProductRepository;
 import ua.mysite.repository.SizeRepository;
 import ua.mysite.service.ProductService;
+import ua.mysite.service.implementation.specification.ProductFormFilterAdapter;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -73,6 +75,11 @@ public class ProductServiceImpl implements ProductService {
 
 	public Page<Product> findAll(Pageable pageable) {
 		return productRepository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Product> findAll(Pageable pageable, ProductFormFilter form) {
+		return productRepository.findAll(new ProductFormFilterAdapter(form), pageable);
 	}
 
 }

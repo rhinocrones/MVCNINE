@@ -4,6 +4,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import ua.form.ProductForm;
+import ua.form.ProductFormFilter;
 import ua.mysite.entity.Brand;
 import ua.mysite.entity.Category;
 import ua.mysite.entity.Size;
@@ -43,6 +45,11 @@ public class ProductController {
 	
 	@Autowired 
 	private SizeService sizeService;
+	
+	@ModelAttribute("filter")
+	public ProductFormFilter getFilter() {
+		return new ProductFormFilter();
+	}
 		
 	@InitBinder("form")
 	protected void initBinder(WebDataBinder binder){
@@ -58,8 +65,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/adminPanel/product")
-	public String showProducts(Model model, @PageableDefault(5) Pageable pageable){
-		model.addAttribute("page", productService.findAll(pageable));
+	public String showProducts(Model model, @PageableDefault(5) Pageable pageable,
+			@ModelAttribute(value = "filter") ProductFormFilter form){
+		model.addAttribute("page", productService.findAll(pageable, form));
 		model.addAttribute("categories", categoryService.findAll());
 		model.addAttribute("brands", brandService.findAll());
 		model.addAttribute("sizes", sizeService.findAll());
@@ -67,23 +75,26 @@ public class ProductController {
 	}
 
 	@RequestMapping(value="/adminPanel/product", method=RequestMethod.POST)
-	public String save(@ModelAttribute("form") @Valid ProductForm form, BindingResult br, Model model, @PageableDefault(5) Pageable pageable){
+	public String save(@ModelAttribute("form") @Valid ProductForm form, BindingResult br, 
+			Model model, @PageableDefault(5) Pageable pageable,
+			@ModelAttribute(value = "filter") ProductFormFilter form1){
 		if(br.hasErrors()){
-			model.addAttribute("page", productService.findAll(pageable));
+			model.addAttribute("page", productService.findAll(pageable, form1));
 			model.addAttribute("categories", categoryService.findAll());
 			model.addAttribute("brands", brandService.findAll());
 			model.addAttribute("sizes", sizeService.findAll());
 			return "product";
 		}
 		productService.save(form);
-		return "redirect:/adminPanel/product";
+		return "redirect:/adminPanel/product"+getParams(pageable, form1);
 	}
 	
 	@RequestMapping(value="/adminPanel/product/update/{id}")
 	public String update(@PathVariable int id, Model model,
-			@PageableDefault(5) Pageable pageable){
+			@PageableDefault(5) Pageable pageable,
+			@ModelAttribute(value = "filter") ProductFormFilter form){
 		model.addAttribute("form", productService.findForForm(id));
-		model.addAttribute("page", productService.findAll(pageable));
+		model.addAttribute("page", productService.findAll(pageable, form));
 		model.addAttribute("categories", categoryService.findAll());
 		model.addAttribute("brands", brandService.findAll());
 		model.addAttribute("sizes", sizeService.findAll());
@@ -91,13 +102,30 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/adminPanel/product/delete/{id}")
-	public String delete(
-			@PathVariable int id,
-			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			@RequestParam(value = "size", required = false, defaultValue = "5") int size,
-			@RequestParam(value = "sort", required = false, defaultValue = "") String sort) {
+	public String delete(@PathVariable int id,
+			@PageableDefault(5) Pageable pageable,
+			@ModelAttribute(value = "filter") ProductFormFilter form) {
 		productService.deleteById(id);
-		return "redirect:/adminPanel/product?page=" + page + "&size=" + size
-				+ "&sort=" + sort;
+		return "redirect:/adminPanel/product"+getParams(pageable, form);
+	}
+	
+	private String getParams(Pageable pageable, ProductFormFilter form) {
+		StringBuilder buffer = new StringBuilder();
+		buffer.append("?page=");
+		buffer.append(String.valueOf(pageable.getPageNumber() + 1));
+		buffer.append("&size=");
+		buffer.append(String.valueOf(pageable.getPageSize()));
+		if (pageable.getSort() != null) {
+			buffer.append("&sort=");
+			Sort sort = pageable.getSort();
+			sort.forEach((order) -> {
+				buffer.append(order.getProperty());
+				if (order.getDirection() != Direction.ASC)
+					buffer.append(",desc");
+			});
+		}
+		buffer.append("&search=");
+		buffer.append(form.getSearch());
+		return buffer.toString();
 	}
 }
