@@ -20,4 +20,9 @@ public class IndexController {
 	public String showuser(){
 		return "userPanel";
 	}
+
+	@RequestMapping("/login")
+	public String showLogin() {
+		return "login";
+	}
 }

@@ -108,4 +108,9 @@ public class UsrController {
 		buffer.append(form.getSearch());
 		return buffer.toString();
 	}
+	
+	@RequestMapping("/registration")
+	public String register(){
+		return "registration";
+	}
 }

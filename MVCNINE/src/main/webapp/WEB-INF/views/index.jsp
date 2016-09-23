@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h2>Index page</h2>
+	<a href="/registration">Register</a>
 	<a href="/adminPanel">Enter Admin Panel</a>
 	<hr>
 	<a href="/userPanel">Buy product</a>
