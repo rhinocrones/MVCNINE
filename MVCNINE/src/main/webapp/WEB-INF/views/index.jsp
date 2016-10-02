@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Shape Products</title>
-</head>
-<body>
-	<h2>Index page</h2>
-	<a href="/registration">Register</a>
-	<a href="/adminPanel">Enter Admin Panel</a>
-	<hr>
-	<a href="/userPanel">Buy product</a>
-</body>
-</html>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
+
+<h1>Hello</h1>
+<security:authorize access="!isAuthenticated()">
+<a href="/registration">Register</a>
+</security:authorize>
+<security:authorize access="isAuthenticated() and hasRole('ROLE_ADMIN')">
+<a href="/adminPanel">Admin panel</a>
+</security:authorize>

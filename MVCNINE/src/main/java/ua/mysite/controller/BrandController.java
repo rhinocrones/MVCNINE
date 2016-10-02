@@ -80,19 +80,19 @@ public class BrandController {
 		return "brand";
 	}
 
-	private String getParams(Pageable pageable, BrandFilter form) {
+	private String getParams(Pageable pageable, BrandFilter form){
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("?page=");
-		buffer.append(String.valueOf(pageable.getPageNumber() + 1));
+		buffer.append(String.valueOf(pageable.getPageNumber()+1));
 		buffer.append("&size=");
 		buffer.append(String.valueOf(pageable.getPageSize()));
-		if (pageable.getSort() != null) {
+		if(pageable.getSort()!=null){
 			buffer.append("&sort=");
 			Sort sort = pageable.getSort();
-			sort.forEach((order) -> {
+			sort.forEach((order)->{
 				buffer.append(order.getProperty());
-				if (order.getDirection() != Direction.ASC)
-					buffer.append(",desc");
+				if(order.getDirection()!=Direction.ASC)
+				buffer.append(",desc");
 			});
 		}
 		buffer.append("&search=");

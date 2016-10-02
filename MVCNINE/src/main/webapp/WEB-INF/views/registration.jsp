@@ -9,7 +9,7 @@
 			<p style="color: red;">Fail</p>
 		</div>
 	</c:if>
-		<form:form action="/login" class="form-group" method="post" modelAttribute="usr">
+		<form:form action="/registration" class="form-group" method="post" modelAttribute="usr">
 				<div class="form-group">
 					<input name="username" placeholder="Login" class="form-control" />
 					<input name="email" placeholder="E-mail" class="form-control" />

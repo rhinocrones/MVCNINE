@@ -37,7 +37,7 @@ public class Usr implements UserDetails{
  
     private String password;
  
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Role role;
    
     @OneToMany(mappedBy="usr")
@@ -60,7 +60,7 @@ public class Usr implements UserDetails{
     }
  
     public String getUsername() {
-        return username;
+        return String.valueOf(id);
     }
  
     public void setUsername(String username) {
@@ -90,8 +90,12 @@ public class Usr implements UserDetails{
     public void setRole(Role role) {
         this.role = role;
     }
-
-	@Override
+    
+    public String getName(){
+    	return username;
+    }
+    
+    @Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 		authorities.add(new SimpleGrantedAuthority(role.getRole()));

@@ -14,7 +14,7 @@ public class GlobalController {
 	@Autowired
 	private UsrService usrService;
 
-	@ModelAttribute("usr")
+	@ModelAttribute("authUser")
 	public Usr getUser() {
 		String id = SecurityContextHolder.getContext().getAuthentication()
 				.getName();

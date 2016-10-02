@@ -89,19 +89,19 @@ public class UsrController {
 		return "redirect:/adminPanel/usr"+ getParams(pageable, form);
 	}
 	
-	private String getParams(Pageable pageable, UsrFilter form) {
+	private String getParams(Pageable pageable, UsrFilter form){
 		StringBuilder buffer = new StringBuilder();
 		buffer.append("?page=");
-		buffer.append(String.valueOf(pageable.getPageNumber() + 1));
+		buffer.append(String.valueOf(pageable.getPageNumber()+1));
 		buffer.append("&size=");
 		buffer.append(String.valueOf(pageable.getPageSize()));
-		if (pageable.getSort() != null) {
+		if(pageable.getSort()!=null){
 			buffer.append("&sort=");
 			Sort sort = pageable.getSort();
-			sort.forEach((order) -> {
+			sort.forEach((order)->{
 				buffer.append(order.getProperty());
-				if (order.getDirection() != Direction.ASC)
-					buffer.append(",desc");
+				if(order.getDirection()!=Direction.ASC)
+				buffer.append(",desc");
 			});
 		}
 		buffer.append("&search=");
@@ -112,5 +112,11 @@ public class UsrController {
 	@RequestMapping("/registration")
 	public String register(){
 		return "registration";
+	}
+	
+	@RequestMapping(value="/registration", method=RequestMethod.POST)
+	public String save(@ModelAttribute("user") Usr user){
+		usrService.save(user);
+		return "redirect:/login";
 	}
 }

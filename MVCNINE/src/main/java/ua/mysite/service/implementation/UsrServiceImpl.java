@@ -36,7 +36,8 @@ public class UsrServiceImpl implements UsrService,  UserDetailsService {
 	@Override
 	public void save(Usr user) {
 		Role role = new Role();
-		role.setRole("admin");
+		role.setRole("ROLE_USER");
+		roleRepository.save(role);
 		user.setRole(role);
 		user.setPassword(encoder.encode(user.getPassword()));
 		usrRepository.save(user);
@@ -82,20 +83,22 @@ public class UsrServiceImpl implements UsrService,  UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
+		System.out.println(username);
+		System.out.println(usrRepository.findByUsername(username));
 		return usrRepository.findByUsername(username);
 	}
 
 	@PostConstruct
 	public void saveAdmin(){
 		Role role = new Role();
-		role.setRole("admin");
-/*		role.setId(1);*/
+		role.setId(1);
+		role.setRole("ROLE_ADMIN");
 		roleRepository.save(role);
 		Usr user = new Usr();
-		user.setRole(role);
-		user.setPassword(encoder.encode("admin"));
-		user.setUsername("admin");
 		user.setId(1);
+		user.setRole(role);
+		user.setPassword(encoder.encode("Admin8"));
+		user.setUsername("admin");
 		usrRepository.save(user);
 	}
 	

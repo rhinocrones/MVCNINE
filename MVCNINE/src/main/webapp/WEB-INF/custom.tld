@@ -4,7 +4,7 @@
   <short-name>Pageable TLD</short-name>
   <tag>
     <name>pageable</name>
-    <tag-class>ua.mysite.service.implementation.tag.PageableTag</tag-class>
+    <tag-class>ua.service.implementation.tag.PageableTag</tag-class>
     <body-content>empty</body-content>
      <attribute>
       <name>page</name>
