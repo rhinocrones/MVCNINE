@@ -1,5 +1,7 @@
 package ua.mysite.controller;
 
+import java.io.Serializable;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,12 @@ import ua.mysite.service.RoleService;
 import ua.mysite.service.implementation.validator.RoleValidator;
 
 @Controller
-public class RoleController {
+public class RoleController implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8962913040966848188L;
 	@Autowired
 	private RoleService roleService;
 

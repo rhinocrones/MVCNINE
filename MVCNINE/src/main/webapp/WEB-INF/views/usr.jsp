@@ -2,130 +2,115 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="/WEB-INF/custom.tld" prefix="custom"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
-<body>
-	<h4>User menu</h4>
-	<form:form action="/adminPanel/usr" method="post" modelAttribute="usr">
-		<form:hidden path="id" />
-		<c:forEach items="${param}" var="parameter">
-			<c:forEach items="${parameter.value}" var="value">
-				<c:if
-					test="${parameter.key ne 'username' and parameter.key ne 'id'}">
-					<input type="hidden" name="${parameter.key}" value="${value}">
-				</c:if>
-			</c:forEach>
-		</c:forEach>
-		<table>
-			<tr>
-				<td><form:select path="role">
-						<c:forEach items="${roles}" var="role">
-							<c:choose>
-								<c:when test="${role.id eq usr.role.id}">
-									<option value="${role.id}" selected="selected">${role.role}</option>
-								</c:when>
-								<c:otherwise>
-									<option value="${role.id}">${role.role}</option>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</form:select></td>
-			</tr>
-			<tr>
-				<td><form:errors path="username" /></td>
-			</tr>
-			<tr>
-				<td><form:input path="username" placeholder="Enter username" /></td>
-			</tr>
-			<tr>
-				<td><form:errors path="email" /></td>
-			</tr>
-			<tr>
-				<td><form:input path="email" placeholder="Enter email" /></td>
-			</tr>
-			<tr>
-				<td><form:errors path="password" /></td>
-			</tr>
-			<tr>
-				<td><form:input path="password" placeholder="Enter password" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit"></td>
-			</tr>
-		</table>
-	</form:form>
-	<form:form action="/adminPanel/usr" method="get"
-		modelAttribute="filter">
-		<c:forEach items="${param}" var="parameter">
-			<c:forEach items="${parameter.value}" var="value">
-				<c:if test="${parameter.key ne 'search'}">
-					<input type="hidden" name="${parameter.key}" value="${value}">
-				</c:if>
-			</c:forEach>
-		</c:forEach>
-		<table>
-			<tr>
-				<td><form:input path="search" placeholder="search" /><input
-					type="submit" value="ok"></td>
-			</tr>
-		</table>
-	</form:form>
-	<table>
-		<tr>
-			<th>User name</th>
-		</tr>
-		<c:forEach items="${page.content}" var="usr">
-			<tr>
-				<td>${usr.username}</td>
-				<td>${usr.role.role}</td>
-				<td>${usr.email}</td>
-				<td>${usr.password}</td>
-				<td><a
-					href="/adminPanel/usr/delete/${usr.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}&search=${param['search']}">delete</a>
-				</td>
-				<td><a
-					href="/adminPanel/usr/update/${usr.id}?page=${page.number+1}&size=${page.size}&sort=${param['sort']}&search=${param['search']}">update</a>
-				</td>
-			</tr>
-		</c:forEach>
-		<tr>
-			<td><a
-				href="?page=1&size=1&sort=${param['sort']}&search=${param['search']}">1</a></td>
-			<td><a
-				href="?page=1&size=5&sort=${param['sort']}&search=${param['search']}">5</a></td>
-			<td><a
-				href="?page=1&size=10&sort=${param['sort']}&search=${param['search']}">10</a></td>
-			<td><a
-				href="?page=1&size=20&sort=${param['sort']}&search=${param['search']}">20</a></td>
-		</tr>
-		<tr>
-			<td><a
-				href="?page=1&size=${page.size}&sort=username&search=${param['search']}">Username
-					asc</a></td>
-			<td><a
-				href="?page=1&size=${page.size}&sort=username,desc&search=${param['search']}">Username
-					desc</a></td>
-			<td><a
-				href="?page=1&size=${page.size}&sort=role.role&search=${param['search']}">Role
-					asc</a></td>
-			<td><a
-				href="?page=1&size=${page.size}&sort=role.role,desc&search=${param['search']}">Role
-					desc</a></td>
-		</tr>
-	</table>
-	<div class="col-md-12 text-center">
-		<custom:pageable page="${page}" cell="<li></li>"
-			container="<ul class='pagination'></ul>" />
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<link rel="stylesheet" href="/resources/css/ingredientAmount.css">
+<div class="row-fluid">
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="collapse navbar-collapse" id="">
+				<ul class="nav navbar-nav">
+					<li><a href="/adminPanel/category">Category</a></li>
+					<li><a href="/adminPanel/size">Size</a></li>
+					<li><a href="/adminPanel/brand">Brand</a></li>
+					<li><a href="/adminPanel/role">Role</a></li>
+					<li class="active"><a href="/adminPanel/usr">User</a><span
+						class="sr-only">(current)</span></li>
+					<li><a href="/adminPanel/product">Product</a></li>
+					<li><a href="/adminPanel/userOrder">User Order</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</div>
+<div class="row-fluid">
+	<div class="col-md-3 col-xs-12">
+		<form:form action="/adminPanel/usr" class="form-inline" method="get"
+			modelAttribute="filter">
+			<custom:hiddenInputs excludeParams="roleIds, _roleIds" />
+			<div class="form-group">
+				<h4>Role</h4>
+			</div>
+			<div class="form-group">
+				<form:checkboxes items="${roles}" path="roleIds"
+					itemLabel="name" itemValue="id" />
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary">Ok</button>
+			</div>
+		</form:form>
 	</div>
-	<hr>
-	<a href="/adminPanel">Back to admin panel</a>
-	<hr>
-	<p>
-		<a href="/">Back to the index</a>
-	</p>
-</body>
-</html>
+	<div class="col-md-7 col-xs-12">
+		<form:form class="form-inline" action="/admin/ingredientAmount"
+			method="post" modelAttribute="form">
+			<form:hidden path="id" />
+			<custom:hiddenInputs excludeParams="amount, system, ingredient, id" />
+			<div class="form-group">
+				<label for="amount"><form:errors path="amount" /></label>
+				<form:input path="amount" class="form-control" />
+				<form:select path="system" items="${measuringSystems}"
+					itemLabel="name" itemValue="id">
+				</form:select>
+				<form:select path="ingredient" items="${ingredients}"
+					itemLabel="name" itemValue="id">
+				</form:select>
+				<button type="submit" class="btn btn-primary">Create</button>
+			</div>
+		</form:form>
+		<div class="row">
+			<div class="col-md-2">Amount</div>
+			<div class="col-md-2">Measuring system</div>
+			<div class="col-md-4">Ingredient</div>
+			<div class="col-md-2">
+				<h4>Delete</h4>
+			</div>
+			<div class="col-md-2">
+				<h4>Update</h4>
+			</div>
+		</div>
+		<c:forEach items="${page.content}" var="ingredientAmount">
+			<div class="row">
+				<div class="col-md-2">${ingredientAmount.amount}</div>
+				<div class="col-md-2">${ingredientAmount.measuringSystem.name}</div>
+				<div class="col-md-4">${ingredientAmount.ingredient.name}</div>
+				<div class="col-md-2">
+					<a
+						href="/admin/ingredientAmount/delete/${ingredientAmount.id}<custom:allParams/>">delete</a>
+				</div>
+				<div class="col-md-2">
+					<a
+						href="/admin/ingredientAmount/update/${ingredientAmount.id}<custom:allParams/>">update</a>
+				</div>
+			</div>
+		</c:forEach>
+		<div class="col-md-12 text-center">
+			<custom:pageable page="${page}" cell="<li></li>"
+				container="<ul class='pagination'></ul>" />
+		</div>
+	</div>
+	<div class="col-md-2 col-xs-12">
+		<div class="col-md-6">
+			<div class="dropdown">
+				<button class="btn btn-primary dropdown-toggle" type="button"
+					data-toggle="dropdown">
+					Sort <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<custom:sort innerHtml="Amount asc" paramValue="amount" />
+					<custom:sort innerHtml="Amount desc" paramValue="amount,desc" />
+					<custom:sort innerHtml="Ingredient name asc"
+						paramValue="ingredient.name" />
+					<custom:sort innerHtml="Ingredient name desc"
+						paramValue="ingredient.name,desc" />
+					<custom:sort innerHtml="Ms name asc"
+						paramValue="measuringSystem.name" />
+					<custom:sort innerHtml="Ms name desc"
+						paramValue="measuringSystem.name,desc" />
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<custom:size posibleSizes="1,2,5,10" size="${page.size}"
+				title="Розмір сторінки" />
+		</div>
+	</div>
+</div>

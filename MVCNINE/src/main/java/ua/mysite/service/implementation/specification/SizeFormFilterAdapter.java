@@ -25,8 +25,9 @@ public class SizeFormFilterAdapter implements Specification<Size> {
 		if (query.getResultType() != Long.class
 				&& query.getResultType() != long.class) {
 		}
-		Expression<String> exp = root.get("size");
-		return cb.like(exp, Integer.valueOf(search) + "%");
+		if(search.isEmpty())return null;
+		Expression<Integer> exp = root.get("size");
+		return cb.equal(exp, Integer.valueOf(search));
 	}
 
 }

@@ -4,7 +4,7 @@
   <short-name>Pageable TLD</short-name>
   <tag>
     <name>pageable</name>
-    <tag-class>ua.service.implementation.tag.PageableTag</tag-class>
+    <tag-class>ua.mysite.service.implementation.tag.PageableTag</tag-class>
     <body-content>empty</body-content>
      <attribute>
       <name>page</name>
@@ -27,7 +27,7 @@
   </tag>
   <tag>
     <name>sort</name>
-    <tag-class>ua.service.implementation.tag.SortTag</tag-class>
+    <tag-class>ua.mysite.service.implementation.tag.SortTag</tag-class>
     <body-content>empty</body-content>
      <attribute>
       <name>paramValue</name>
@@ -44,7 +44,7 @@
   </tag>
   <tag>
     <name>size</name>
-    <tag-class>ua.service.implementation.tag.SizeTag</tag-class>
+    <tag-class>ua.mysite.service.implementation.tag.SizeTag</tag-class>
     <body-content>empty</body-content>
      <attribute>
       <name>size</name>
@@ -67,7 +67,7 @@
   </tag>
    <tag>
     <name>hiddenInputs</name>
-    <tag-class>ua.service.implementation.tag.HiddenInputs</tag-class>
+    <tag-class>ua.mysite.service.implementation.tag.HiddenInputs</tag-class>
     <body-content>empty</body-content>
      <attribute>
       <name>excludeParams</name>
@@ -78,7 +78,7 @@
   </tag>
    <tag>
     <name>allParams</name>
-    <tag-class>ua.service.implementation.tag.AllParams</tag-class>
+    <tag-class>ua.mysite.service.implementation.tag.AllParams</tag-class>
     <body-content>empty</body-content>
   </tag>
 </taglib>

@@ -17,7 +17,7 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/userPanel")
-	public String showuser(){
+	public String showUser(){
 		return "userPanel";
 	}
 
