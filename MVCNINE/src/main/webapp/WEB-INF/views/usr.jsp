@@ -23,7 +23,7 @@
 	</nav>
 </div>
 <div class="row-fluid">
-	<div class="col-md-3 col-xs-12">
+		<div class="col-md-3 col-xs-12">
 		<form:form action="/adminPanel/usr" class="form-inline" method="get"
 			modelAttribute="filter">
 			<custom:hiddenInputs excludeParams="roleIds, _roleIds" />
@@ -31,8 +31,8 @@
 				<h4>Role</h4>
 			</div>
 			<div class="form-group">
-				<form:checkboxes items="${roles}" path="roleIds"
-					itemLabel="name" itemValue="id" />
+				<form:checkboxes items="${roles}" path="role" itemLabel="role"
+					itemValue="id" />
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Ok</button>
@@ -40,77 +40,63 @@
 		</form:form>
 	</div>
 	<div class="col-md-7 col-xs-12">
-		<form:form class="form-inline" action="/admin/ingredientAmount"
-			method="post" modelAttribute="form">
+		<form:form class="form-inline" action="/adminPanel/usr" method="post"
+			modelAttribute="usr">
 			<form:hidden path="id" />
-			<custom:hiddenInputs excludeParams="amount, system, ingredient, id" />
+			<custom:hiddenInputs
+				excludeParams="username, password, email, role, id" />
 			<div class="form-group">
-				<label for="amount"><form:errors path="amount" /></label>
-				<form:input path="amount" class="form-control" />
-				<form:select path="system" items="${measuringSystems}"
-					itemLabel="name" itemValue="id">
-				</form:select>
-				<form:select path="ingredient" items="${ingredients}"
-					itemLabel="name" itemValue="id">
+				<label for="username"><form:errors path="username" /></label>
+				<form:input path="name" class="form-control" />
+				<label for="password"><form:errors path="password" /></label>
+				<form:input path="password" class="form-control" />
+				<label for="email"><form:errors path="email" /></label>
+				<form:input path="email" class="form-control" />
+				<form:select path="role" items="${roles}" itemLabel="role"
+					itemValue="id">
 				</form:select>
 				<button type="submit" class="btn btn-primary">Create</button>
 			</div>
 		</form:form>
+	</div>
+	<c:forEach items="${page.content}" var="usr">
 		<div class="row">
-			<div class="col-md-2">Amount</div>
-			<div class="col-md-2">Measuring system</div>
-			<div class="col-md-4">Ingredient</div>
+			<div class="col-md-2">${usr.name}</div>
+			<div class="col-md-2">${usr.password}</div>
+			<div class="col-md-2">${usr.email}</div>
+			<div class="col-md-2">${usr.role.role}</div>
 			<div class="col-md-2">
-				<h4>Delete</h4>
+				<a href="/adminPanel/usr/delete/${usr.id}<custom:allParams/>">delete</a>
 			</div>
 			<div class="col-md-2">
-				<h4>Update</h4>
+				<a href="/adminPanel/usr/update/${usr.id}<custom:allParams/>">update</a>
 			</div>
 		</div>
-		<c:forEach items="${page.content}" var="ingredientAmount">
-			<div class="row">
-				<div class="col-md-2">${ingredientAmount.amount}</div>
-				<div class="col-md-2">${ingredientAmount.measuringSystem.name}</div>
-				<div class="col-md-4">${ingredientAmount.ingredient.name}</div>
-				<div class="col-md-2">
-					<a
-						href="/admin/ingredientAmount/delete/${ingredientAmount.id}<custom:allParams/>">delete</a>
-				</div>
-				<div class="col-md-2">
-					<a
-						href="/admin/ingredientAmount/update/${ingredientAmount.id}<custom:allParams/>">update</a>
-				</div>
-			</div>
-		</c:forEach>
-		<div class="col-md-12 text-center">
-			<custom:pageable page="${page}" cell="<li></li>"
-				container="<ul class='pagination'></ul>" />
+	</c:forEach>
+	<div class="col-md-12 text-center">
+		<custom:pageable page="${page}" cell="<li></li>"
+			container="<ul class='pagination'></ul>" />
+	</div>
+</div>
+<div class="col-md-2 col-xs-12">
+	<div class="col-md-6">
+		<div class="dropdown">
+			<button class="btn btn-primary dropdown-toggle" type="button"
+				data-toggle="dropdown">
+				Sort <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<custom:sort innerHtml="Role asc" paramValue="role.role" />
+				<custom:sort innerHtml="Role desc" paramValue="role.role,desc" />
+				<custom:sort innerHtml="Username asc" paramValue="username" />
+				<custom:sort innerHtml="Username desc" paramValue="username,desc" />
+				<custom:sort innerHtml="Email asc" paramValue="email" />
+				<custom:sort innerHtml="Email desc" paramValue="email,desc" />
+			</ul>
 		</div>
 	</div>
-	<div class="col-md-2 col-xs-12">
-		<div class="col-md-6">
-			<div class="dropdown">
-				<button class="btn btn-primary dropdown-toggle" type="button"
-					data-toggle="dropdown">
-					Sort <span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<custom:sort innerHtml="Amount asc" paramValue="amount" />
-					<custom:sort innerHtml="Amount desc" paramValue="amount,desc" />
-					<custom:sort innerHtml="Ingredient name asc"
-						paramValue="ingredient.name" />
-					<custom:sort innerHtml="Ingredient name desc"
-						paramValue="ingredient.name,desc" />
-					<custom:sort innerHtml="Ms name asc"
-						paramValue="measuringSystem.name" />
-					<custom:sort innerHtml="Ms name desc"
-						paramValue="measuringSystem.name,desc" />
-				</ul>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<custom:size posibleSizes="1,2,5,10" size="${page.size}"
-				title="Розмір сторінки" />
-		</div>
+	<div class="col-md-6">
+		<custom:size posibleSizes="1,2,5,10" size="${page.size}"
+			title="Розмір сторінки" />
 	</div>
 </div>

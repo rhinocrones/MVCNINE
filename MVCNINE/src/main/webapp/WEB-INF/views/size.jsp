@@ -51,7 +51,7 @@
 			</form:form>
 		</div>
 		<div class="col-md-4 col-xs-4">
-			<h4>Size</h4>
+			<h4>User</h4>
 		</div>
 		<div class="col-md-4 col-xs-4">
 			<h4>Delete</h4>
