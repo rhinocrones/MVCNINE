@@ -1,7 +1,6 @@
 package ua.mysite.controller;
 
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import ua.form.UsrFilter;
 import ua.mysite.entity.Role;
 import ua.mysite.entity.Usr;
@@ -104,8 +102,10 @@ public class UsrController {
 				buffer.append(",desc");
 			});
 		}
-		buffer.append("&search=");
-		buffer.append(form.getSearch());
+		for(Integer i : form.getRoleIds()){
+			buffer.append("&roleIds=");
+			buffer.append(i.toString());
+		}
 		return buffer.toString();
 	}
 	
